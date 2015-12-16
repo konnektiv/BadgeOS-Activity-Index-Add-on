@@ -7,7 +7,7 @@ Stable tag: 0.0.1
 License: GNU AGPLv3
 License URI: http://www.gnu.org/licenses/agpl-3.0.html
 
-Shows an activity index analyis in the backend dashboard.
+Shows an activity index analysis in the backend dashboard.
 
 == Description ==
 
