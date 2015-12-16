@@ -38,7 +38,7 @@ add_action('wp_dashboard_setup', function () {
 
 					foreach ( $achievements as $achievement ) {
 						// Add any achievements that match our achievement type
-						if ( $achievement_type == $achievement->post_type ) {
+						if ( !$achievement_type || $achievement_type == $achievement->post_type ) {
 							$key = strtotime(date("F Y", $achievement->date_earned));
 
 							if (!isset($points[$key]))
@@ -77,6 +77,7 @@ add_action('wp_dashboard_setup', function () {
 		<p>
 			<label for="bai_achievement_type"><?php _e('Choose the achievement type:', 'badgeos-activity-index'); ?></label>
 			<select class="widefat" id="bai_achievement_type" name="bai_dashboard_widget_options[achievement_type]">
+				<option value="" <?php selected(null, $achievement_type) ?>><?php _e('All types', 'badgeos-activity-index') ?></option>
 				<?php foreach($achievement_types as $slug => $type){ ?>
 					<option value="<?php echo($slug) ?>" <?php selected($slug, $achievement_type) ?>><?php echo($type['single_name']) ?></option>
 				<?php } ?>
