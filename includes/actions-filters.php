@@ -5,7 +5,9 @@ add_action('wp_dashboard_setup', function () {
 	wp_add_dashboard_widget('badgeos_activity_index_widget', __('Activity Index', 'badgeos-activity-index'), function () {
 		global $wpdb;
 		$meta_key = '_badgeos_achievements';
-		$achievement_type = 'site-activity';
+
+		$widget_options = get_option( '_bai_dashboard_widget_options' );
+		$achievement_type = $widget_options['achievement_type'];
 
 		// get all achievements from all users
 		$user_achievements = $wpdb->get_col( $wpdb->prepare("
@@ -14,7 +16,7 @@ add_action('wp_dashboard_setup', function () {
 			WHERE meta_key = %s", $meta_key) );
 
 		$points = array();
-		$test_count = 100;
+		$test_count = 0;
 
 		if ( is_array( $user_achievements) && ! empty( $user_achievements ) ) {
 			foreach ( $user_achievements as $achievements ) {
@@ -56,8 +58,32 @@ add_action('wp_dashboard_setup', function () {
 			echo "<tr><td>$date</td><td>$point</td></tr>";
 		}
 		echo "</tbody></table>";
+	}, function() {
+		$option_name =  '_bai_dashboard_widget_options';
+
+		// Update widget options
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && isset($_POST['bai_dashboard_widget_post']) ) {
+			update_option( $option_name, $_POST['bai_dashboard_widget_options'] );
+		}
+
+		// Get widget options
+		if ( !$widget_options = get_option( $option_name ) )
+			$widget_options = array();
+
+		$achievement_type = $widget_options['achievement_type'];
+		$achievement_types =  badgeos_get_achievement_types();
+		?>
+
+		<p>
+			<label for="bai_achievement_type"><?php _e('Choose the achievement type:', 'badgeos-activity-index'); ?></label>
+			<select class="widefat" id="bai_achievement_type" name="bai_dashboard_widget_options[achievement_type]">
+				<?php foreach($achievement_types as $slug => $type){ ?>
+					<option value="<?php echo($slug) ?>" <?php selected($slug, $achievement_type) ?>><?php echo($type['single_name']) ?></option>
+				<?php } ?>
+			</select>
+			<input name="bai_dashboard_widget_post" type="hidden" value="1" />
+		</p>
+
+		<?php
 	});
 });
-
-
-
