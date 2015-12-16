@@ -11,7 +11,7 @@ Shows an activity index analysis in the backend dashboard.
 
 == Description ==
 
-Shows an activity index analyis in the backend dashboard.
+Shows an activity index analysis in the backend dashboard.
 
 **Note:** You will need to install the free [BadgeOS plugin](http://wordpress.org/extend/plugins/badgeos/ "BadgeOS")&trade; (version 1.2 or higher) to use the BadgeOS Community Add-on.
 
