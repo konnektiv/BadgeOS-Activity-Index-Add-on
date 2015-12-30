@@ -23,7 +23,7 @@ add_action('wp_dashboard_setup', function () {
 			WHERE meta_key = %s", $meta_key) );
 
 		$points = array();
-		$test_count = 40;
+		$test_count = 0;
 
 		if ( is_array( $user_achievements) && ! empty( $user_achievements ) ) {
 			foreach ( $user_achievements as $achievements ) {
