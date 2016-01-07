@@ -23,7 +23,7 @@ add_action('wp_dashboard_setup', function () {
 			WHERE meta_key = %s", $meta_key) );
 
 		$points = array();
-		$test_count = 0;
+		$test_count = $widget_options['preview']?40:0;
 
 		if ( is_array( $user_achievements) && ! empty( $user_achievements ) ) {
 			foreach ( $user_achievements as $achievements ) {
@@ -84,6 +84,7 @@ add_action('wp_dashboard_setup', function () {
 		$achievement_types =  badgeos_get_achievement_types();
 		$cur_interval = isset($widget_options['interval'])?$widget_options['interval']:'monthly';
 		$intervals = array('monthly', 'weekly', 'daily');
+		$preview = $widget_options['preview'];
 		?>
 
 		<p>
@@ -102,6 +103,10 @@ add_action('wp_dashboard_setup', function () {
 					<option value="<?php echo $interval ?>" <?php selected($interval, $cur_interval) ?>><?php echo $interval ?></option>
 				<?php } ?>
 			</select>
+		</p>
+		<p>
+			<input type="checkbox" id="bai_preview" <?php checked(true, $preview) ?> name="bai_dashboard_widget_options[preview]" value="1">
+			<label for="bai_preview"><?php _e('Show preview of activity data', 'badgeos-activity-index'); ?></label>
 		</p>
 		<input name="bai_dashboard_widget_post" type="hidden" value="1" />
 
