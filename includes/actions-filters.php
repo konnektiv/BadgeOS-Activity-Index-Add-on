@@ -61,6 +61,10 @@ add_action('wp_dashboard_setup', function () {
 		ksort($points);
 		$points = array_reverse($points, true);
 		$header = $interval['header'];
+		if ($widget_options['preview']) { ?>
+			<p>This data is only a preview! To see the real data, uncheck 'Show preview of activity data' in the <a href="/wp-admin/index.php?edit=badgeos_activity_index_widget#badgeos_activity_index_widget">Configure</a> screen.</p>
+		<?php }
+
 		echo "<table><thead><tr><th>$header</th><th>Index</th></thead><tbody>";
 		foreach ( $points as $key => $point ) {
 			$label = $point['label'];
