@@ -5,3 +5,8 @@
  	left: auto !important;
  	right: 0;
 }
+.activity-index-select-table.active,
+.activity-index-select-chart.active {
+	font-weight: bold;
+}
+

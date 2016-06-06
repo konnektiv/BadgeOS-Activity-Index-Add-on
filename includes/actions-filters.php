@@ -66,7 +66,8 @@ add_action('wp_dashboard_setup', function () {
 		if ($widget_options['preview']) { ?>
 			<p>This data is only a preview! To see the real data, uncheck 'Show preview of activity data' in the <a href="<?php echo admin_url('/index.php?edit=badgeos_activity_index_widget#badgeos_activity_index_widget') ?>">Configure</a> screen.</p>
 		<?php } ?>
-		<p><a class="activity-index-select-table" href="">Table</a>|<a class="activity-index-select-chart" href="">Chart</a></p>
+		<p><a class="activity-index-select-table <?php echo ($cur_display =='table'?'active':'') ?>" href="">Table</a>|
+			<a class="activity-index-select-chart <?php echo ($cur_display =='chart'?'active':'') ?>" href="">Chart</a></p>
 
 		<div class="activity_index_table" <?php if ($cur_display =='chart') echo 'style="display: none;"'; ?>>
 

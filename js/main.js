@@ -20,15 +20,23 @@ chart.parse(activity_index_data['data'],"json");
 $('.activity-index-select-table').click(function(e) {
 	e.preventDefault();
 	e.stopPropagation();
+	if ($(this).hasClass('active'))
+		return;
 	$('.activity_index_chart').hide();
 	$('.activity_index_table').show();
+	$('.activity-index-select-chart').toggleClass('active');
+	$('.activity-index-select-table').toggleClass('active');
 });
 
 $('.activity-index-select-chart').click(function(e) {
 	e.preventDefault();
 	e.stopPropagation();
+	if ($(this).hasClass('active'))
+		return;
 	$('.activity_index_chart').show();
 	$('.activity_index_table').hide();
+	$('.activity-index-select-chart').toggleClass('active');
+	$('.activity-index-select-table').toggleClass('active');
 });
 
 // add last class
