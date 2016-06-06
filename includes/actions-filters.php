@@ -91,7 +91,7 @@ add_action('wp_dashboard_setup', function () {
 		$i = 0;
 		foreach ( $points as $key => $point ) {
 			$chart_data['data'][] = array(
-				'tooltip' => $point['label'],
+				'tooltip' => $point['label'] . ': ' . $point['points'],
 				'label'   => !($i % $steps)||$i==(count($points)-1)?$point['label']:'',
 				'points'  => $point['points']
 			);
