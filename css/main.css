@@ -1,0 +1,7 @@
+.activity_index_chart canvas+div.dhx_axis_item_x {
+ 	left: 0 !important;
+}
+.activity_index_chart div.dhx_axis_item_x.last {
+ 	left: auto !important;
+ 	right: 0;
+}

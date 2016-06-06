@@ -34,7 +34,7 @@ class BadgeOS_ActivityIndex {
 		// Define plugin constants
 		$this->basename       = plugin_basename( __FILE__ );
 		$this->directory_path = plugin_dir_path( __FILE__ );
-		$this->directory_url  = plugins_url( 'badgeos-activity-index/' );
+		$this->directory_url  = plugin_dir_url(  __FILE__ );
 
 		// Load translations
 		load_plugin_textdomain( 'badgeos-activity-index', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -45,7 +45,7 @@ class BadgeOS_ActivityIndex {
 		// If BadgeOS is unavailable, deactivate our plugin
 		add_action( 'admin_notices', array( $this, 'maybe_disable_plugin' ) );
 		add_action( 'plugins_loaded', array( $this, 'includes' ) );
-		add_action( 'wp_print_scripts', array( $this, 'enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 	}
 
@@ -66,6 +66,10 @@ class BadgeOS_ActivityIndex {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
+		wp_enqueue_style( 'dhtmlxchartcss', $this->directory_url . 'codebase/dhtmlxchart.css', array(), '1.0.0' );
+		wp_enqueue_style( 'activity_index_css', $this->directory_url . 'css/main.css', array('dhtmlxchartcss'), '1.0.0' );
+		wp_enqueue_script( 'dhtmlxchartjs', $this->directory_url . 'codebase/dhtmlxchart.js', array(), '', true );
+		wp_register_script( 'activity_index_main', $this->directory_url . 'js/main.js', array( 'jquery', 'dhtmlxchartjs' ), '', true );
 	}
 
 	/**

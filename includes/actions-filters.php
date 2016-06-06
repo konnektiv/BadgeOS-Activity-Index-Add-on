@@ -59,19 +59,48 @@ add_action('wp_dashboard_setup', function () {
 		}
 
 		ksort($points);
-		$points = array_reverse($points, true);
+		$table_points = array_reverse($points, true);
 		$header = $interval['header'];
 		if ($widget_options['preview']) { ?>
 			<p>This data is only a preview! To see the real data, uncheck 'Show preview of activity data' in the <a href="<?php echo admin_url('/index.php?edit=badgeos_activity_index_widget#badgeos_activity_index_widget') ?>">Configure</a> screen.</p>
 		<?php } ?>
+		<p><a class="activity-index-select-table" href="">Table</a>|<a class="activity-index-select-chart" href="">Chart</a></p>
 
+		<div class="activity_index_table" style="display: none;">
+
+		<?php
 		echo "<table><thead><tr><th>$header</th><th>Index</th></thead><tbody>";
-		foreach ( $points as $key => $point ) {
+		foreach ( $table_points as $key => $point ) {
 			$label = $point['label'];
-			$points = $point['points'];
-			echo "<tr><td>$label</td><td>$points</td></tr>";
+			$value = $point['points'];
+			echo "<tr><td>$label</td><td>$value</td></tr>";
 		}
-		echo "</tbody></table>";
+		echo "</tbody></table>"; ?>
+		</div><div class="activity_index_chart">
+
+		<?php
+		$chart_data = array(
+			'data'   => array(),
+			'header' => $header
+		);
+		$max_labels = 2;
+		$steps = intval(count($points) / $max_labels);
+		$i = 0;
+		foreach ( $points as $key => $point ) {
+			$chart_data['data'][] = array(
+				'tooltip' => $point['label'],
+				'label'   => !($i % $steps)||$i==(count($points)-1)?$point['label']:'',
+				'points'  => $point['points']
+			);
+			$i++;
+		}
+		wp_localize_script( 'activity_index_main', 'activity_index_data', $chart_data);
+		wp_enqueue_script( 'activity_index_main' );
+		?>
+		<div id="actvity_chart_container" style="width:100%;height:250px;"></div>
+		</div>
+		<?php
+
 	}, function() {
 		$option_name =  '_bai_dashboard_widget_options';
 
