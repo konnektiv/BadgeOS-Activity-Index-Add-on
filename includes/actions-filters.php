@@ -61,12 +61,14 @@ add_action('wp_dashboard_setup', function () {
 		ksort($points);
 		$table_points = array_reverse($points, true);
 		$header = $interval['header'];
+		$cur_display = isset($widget_options['display'])?$widget_options['display']:'chart';
+
 		if ($widget_options['preview']) { ?>
 			<p>This data is only a preview! To see the real data, uncheck 'Show preview of activity data' in the <a href="<?php echo admin_url('/index.php?edit=badgeos_activity_index_widget#badgeos_activity_index_widget') ?>">Configure</a> screen.</p>
 		<?php } ?>
 		<p><a class="activity-index-select-table" href="">Table</a>|<a class="activity-index-select-chart" href="">Chart</a></p>
 
-		<div class="activity_index_table" style="display: none;">
+		<div class="activity_index_table" <?php if ($cur_display =='chart') echo 'style="display: none;"'; ?>>
 
 		<?php
 		echo "<table><thead><tr><th>$header</th><th>Index</th></thead><tbody>";
@@ -76,7 +78,7 @@ add_action('wp_dashboard_setup', function () {
 			echo "<tr><td>$label</td><td>$value</td></tr>";
 		}
 		echo "</tbody></table>"; ?>
-		</div><div class="activity_index_chart">
+		</div><div class="activity_index_chart" <?php if ($cur_display =='table') echo 'style="display: none;"'; ?>>
 
 		<?php
 		$chart_data = array(
@@ -116,7 +118,9 @@ add_action('wp_dashboard_setup', function () {
 		$achievement_type = $widget_options['achievement_type'];
 		$achievement_types =  badgeos_get_achievement_types();
 		$cur_interval = isset($widget_options['interval'])?$widget_options['interval']:'monthly';
+		$cur_display = isset($widget_options['display'])?$widget_options['display']:'chart';
 		$intervals = array('monthly', 'weekly', 'daily');
+		$displays = array('chart', 'table');
 		$preview = $widget_options['preview'];
 		?>
 
@@ -134,6 +138,14 @@ add_action('wp_dashboard_setup', function () {
 			<select class="widefat" id="bai_interval" name="bai_dashboard_widget_options[interval]">
 				<?php foreach($intervals as $interval){ ?>
 					<option value="<?php echo $interval ?>" <?php selected($interval, $cur_interval) ?>><?php echo $interval ?></option>
+				<?php } ?>
+			</select>
+		</p>
+		<p>
+			<label for="bai_display"><?php _e('Choose default display type:', 'badgeos-activity-index'); ?></label>
+			<select class="widefat" id="bai_display" name="bai_dashboard_widget_options[display]">
+				<?php foreach($displays as $display){ ?>
+					<option value="<?php echo $display ?>" <?php selected($display, $cur_display) ?>><?php echo $display ?></option>
 				<?php } ?>
 			</select>
 		</p>
