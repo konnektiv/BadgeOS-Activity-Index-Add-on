@@ -9,9 +9,9 @@ add_action('wp_dashboard_setup', function () {
 		$widget_options = get_option( '_bai_dashboard_widget_options' );
 		$achievement_type = $widget_options['achievement_type'];
 		$intervals = array(
-			'monthly' => array('format' => 'mo', 'label' => 'F o', 'header' => __('Month', 'badgeos-activity-index')),
-			'weekly'  => array('format' => 'Wo', 'label' => 'W o', 'header' => __('Week', 'badgeos-activity-index')),
-			'daily'   => array('format' => 'mdo', 'label' => 'j F o', 'header' => __('Day', 'badgeos-activity-index')),
+			'monthly' => array('format' => 'om', 'label' => 'F o', 'header' => __('Month', 'badgeos-activity-index')),
+			'weekly'  => array('format' => 'oW', 'label' => 'W/o', 'header' => __('Week', 'badgeos-activity-index')),
+			'daily'   => array('format' => 'omd', 'label' => 'j F o', 'header' => __('Day', 'badgeos-activity-index')),
 		);
 		$interval = isset($widget_options['interval'])?$widget_options['interval']:'monthly';
 		$interval = $intervals[$interval];
