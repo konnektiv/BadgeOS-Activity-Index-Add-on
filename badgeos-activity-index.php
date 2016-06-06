@@ -1,18 +1,18 @@
 <?php
 /**
  * Plugin Name: BadgeOS Activity Index Add-On
- * Plugin URI: http://www.konnektiv.de/
- * Description: This BadgeOS add-on shows an activity index on the admin dashboard
- * Tags: buddypress
+ * Plugin URI: https://wordpress.org/plugins/activity-index-add-on-for-badgeos/
+ * Description: This BadgeOS add-on shows an activity index chart on the admin dashboard
+ * Tags: badgeos
  * Author: konnektiv
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author URI: https://konnektiv.de/
  * License: GNU AGPL
  * Text Domain: badgeos-activity-index
  */
 
 /*
- * Copyright © 2012-2013 LearningTimes, LLC
+ * Copyright © 2012-2013 LearningTimes, LLC, Konnektiv
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Affero General Public License, version 3,
@@ -52,7 +52,7 @@ class BadgeOS_ActivityIndex {
 	/**
 	 * Files to include for BadgeOS integration.
 	 *
-	 * @since  1.1.1
+	 * @since  1.0.0
 	 */
 	public function includes() {
 		if ( $this->meets_requirements() ) {
@@ -89,7 +89,7 @@ class BadgeOS_ActivityIndex {
 	/**
 	 * Check if BadgeOS is available
 	 *
-	 * @since  0.0.1
+	 * @since  1.0.0
 	 * @return bool True if BadgeOS is available, false otherwise
 	 */
 	public static function meets_requirements() {
