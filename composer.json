@@ -1,0 +1,10 @@
+{
+  "name": "konnektiv/badgeos-activity-index-add-on",
+  "description": "This BadgeOS Add-on shows a site wide activity index on the admin dashboard.",
+  "type": "wordpress-plugin",
+  "license": "AGPL-3.0",
+  "require": {
+    "composer/installers": "~1.0",
+    "php": ">=5.2.4"
+  }
+}
