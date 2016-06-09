@@ -30,5 +30,7 @@ This plugin was originally developed for the [globe - Community of Digital Learn
 3. Upload 'BadgeOS-Activity-Index-Add-on' to the '/wp-content/plugins/' directory
 4. Activate the plugin through the 'Plugins' menu in WordPress
 
+== Changelog ==
+
 = 1.0.0 =
 * Initial release
